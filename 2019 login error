@@ -1,0 +1,31 @@
+DECLARE @login  sysname
+
+ SELECT @login = name FROM sys.server_principals WHEREName = N'TestDumper' AND type = N'S'
+
+ IF ( @login IS NULL )
+
+BEGIN
+
+  -- create login
+
+  CREATE LOGIN TestDumper WITH PASSWORD =N'testTEST123TEst',
+
+         default_database = tempdb
+
+              --,         check_expiration = off, check_policy = off
+
+END
+
+ELSE
+
+BEGIN
+
+  -- change login
+
+  ALTER LOGIN TestDumper WITH
+
+         default_database = tempdb
+
+              --,         check_expiration = off, check_policy = off
+
+END
